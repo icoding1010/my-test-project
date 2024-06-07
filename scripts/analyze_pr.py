@@ -168,6 +168,7 @@ def main():
             "base_commit": base_commit,
             "version": version,
         }]
+        print(swe_json)
         swe_json_filename = "swe_json_data.json"
         save_swe_json(swe_json, swe_json_filename)
 
