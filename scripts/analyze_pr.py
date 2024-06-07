@@ -159,8 +159,8 @@ def main():
             "problem_statement_source": "online",
             "repo": "https://github.com/icoding1010/my-test-project/",
             "repo_type": "github",
-            "base_commit": os.getenv("BASE_COMMIT"),
-            "version": os.getenv("VERSION"),
+            "base_commit": base_commit,
+            "version": version,
         }]
         save_swe_json(swe_json, "swe_json_data.json")
     else:
