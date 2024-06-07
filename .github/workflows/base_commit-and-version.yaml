@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Manual triggering
+  schedule: # Scheduled runs
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
 
 jobs:
   get-base-commit:
