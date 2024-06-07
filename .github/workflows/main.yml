@@ -42,3 +42,7 @@ jobs:
         BASE_COMMIT: ${{ env.base_commit }}
         VERSION: ${{ env.version }}
       run: python scripts/analyze_pr.py
+      
+    - name: Run analysis script with JSON argument
+      run: |
+        python analyze_swe_json.py swe_json_data.json
