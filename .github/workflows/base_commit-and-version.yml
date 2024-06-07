@@ -3,17 +3,8 @@ name: Get Base Commit and Version
 on:
   push:
     types: [opened, synchronize, reopened, edited]
-    branches:
-      - main
-      - icoding1010-patch-1
   pull_request:
     types: [opened, synchronize, reopened, edited]
-    branches:
-      - main
-      - icoding1010-patch-1
-  workflow_dispatch: # Manual triggering
-  schedule: # Scheduled runs
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
 
 jobs:
   get-base-commit:
