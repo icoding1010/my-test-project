@@ -36,7 +36,7 @@ class GitHubPR:
             return response.json()
         else:
             return None
-        r
+        
     def get_pr_files(self):
         print("in files")
         url = f'{self.base_url}/files'
@@ -91,6 +91,12 @@ class GitHubPR:
             pr_info['overview'] = pr_overview
         else:
             pr_info['overview'] = None
+
+        pr_details = self.get_pr_details()
+            if pr_details:
+            pr_info['pr_details'] = pr_details
+        else:
+            pr_info['pr_details'] = None
 
         # # PR Files
         # pr_files = self.get_pr_files()
