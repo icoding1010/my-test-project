@@ -45,4 +45,4 @@ jobs:
       
     - name: Run analysis script with JSON argument
       run: |
-        python analyze_swe_json.py swe_json_data.json
+        python scripts/analyze_swe_json.py swe_json_data.json
