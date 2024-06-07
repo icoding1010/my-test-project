@@ -93,7 +93,7 @@ class GitHubPR:
             pr_info['overview'] = None
 
         pr_details = self.get_pr_details()
-            if pr_details:
+        if pr_details:
             pr_info['pr_details'] = pr_details
         else:
             pr_info['pr_details'] = None
