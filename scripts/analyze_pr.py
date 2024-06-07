@@ -162,7 +162,14 @@ def main():
             "base_commit": base_commit,
             "version": version,
         }]
-        save_swe_json(swe_json, "swe_json_data.json")
+        swe_json_filename = "swe_json_data.json"
+        save_swe_json(swe_json, swe_json_filename)
+
+        with open(swe_json_filename, 'rb') as f:
+            artifact_name = 'swe-json-data'
+            github.actions.upload_artifact(artifact_name=artifact_name, file=f)
+        print(f"SWE JSON data uploaded as artifact: {artifact_name}")
+        
     else:
         print("Failed to fetch PR information.")
 
