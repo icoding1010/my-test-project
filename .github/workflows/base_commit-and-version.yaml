@@ -1,0 +1,31 @@
+name: Get Base Commit and Version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  get-base-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get base commit
+        id: get_base_commit
+        run: |
+          base_commit=$(git rev-parse HEAD)
+          echo "base_commit=$base_commit" >> $GITHUB_ENV
+
+      - name: Set version
+        id: set_version
+        run: |
+          version=$(echo "${{ env.base_commit }}" | cut -c1-7)
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Display Base Commit and Version
+        run: |
+          echo "Base Commit: ${{ env.base_commit }}"
+          echo "Version: ${{ env.version }}"
