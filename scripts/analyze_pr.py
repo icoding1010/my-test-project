@@ -36,7 +36,7 @@ class GitHubPR:
             return response.json()
         else:
             return None
-        r
+        
     def get_pr_files(self):
         print("in files")
         url = f'{self.base_url}/files'
@@ -92,6 +92,12 @@ class GitHubPR:
         else:
             pr_info['overview'] = None
 
+        pr_details = self.get_pr_details()
+        if pr_details:
+            pr_info['pr_details'] = pr_details
+        else:
+            pr_info['pr_details'] = None
+
         # # PR Files
         # pr_files = self.get_pr_files()
         # if pr_files:
@@ -138,28 +144,34 @@ def save_swe_json(swe_json_data, filename):
 
 def main():
     # repo_url = os.getenv("GITHUB_REPOSITORY")
-    # pr_number = os.getenv("PR_NUMBER")
+    pr_number = os.getenv("PR_NUMBER")
     token = os.getenv("GITHUB_TOKEN")
     repo_url = "icoding1010/my-test-project"
-    pr_number = 1
+    # pr_number = 1
     # token = my_token
     owner, repo = repo_url.split("/")[-2], repo_url.split("/")[-1]
-
+    base_commit = os.getenv("BASE_COMMIT")
+    version = os.getenv("VERSION")
+    
     github_pr = GitHubPR(owner, repo, pr_number, token)
     pr_data = github_pr.get_pr_info()
+    
     if pr_data:
         # github_pr.save_pr_info(pr_data, "pr_info.json")
         # print("PR information saved as pr_info.json")
-        swe_json = {
+        swe_json = [{
             "problem_statement": pr_data,
             "instance_id": "SWE-agent__test-repo-i1",
             "problem_statement_source": "online",
             "repo": "https://github.com/icoding1010/my-test-project/",
             "repo_type": "github",
-            "base_commit": os.getenv("BASE_COMMIT"),
-            "version": os.getenv("VERSION"),
-        }
-        save_swe_json(swe_json, "swe_json_data.json")
+            "base_commit": base_commit,
+            "version": version,
+        }]
+        print(swe_json)
+        swe_json_filename = "swe_json_data.json"
+        save_swe_json(swe_json, swe_json_filename)
+
     else:
         print("Failed to fetch PR information.")
 
