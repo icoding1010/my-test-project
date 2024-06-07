@@ -30,4 +30,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         GITHUB_REPOSITORY: ${{ github.repository }}
+        BASE_COMMIT: ${{ github.sha }}
+        VERSION: ${{ secrets.VERSION }}
       run: python scripts/analyze_pr.py
